@@ -1,19 +1,24 @@
+
 import Button from '@/components/Button'
 import ScreenWrapper from '@/components/ScreenWrapper'
 import Typo from '@/components/Typo'
 import { colors, spacingX, spacingY } from '@/constants/theme'
 import { verticalScale } from '@/utils/styling'
+import { useRouter } from 'expo-router'
 import React from 'react'
 import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import Animated, { FadeIn, FadeInDown } from 'react-native-reanimated'
 
-const welcome = () => {
+const Welcome = () => {
+
+   const router = useRouter();
+
   return (
     <ScreenWrapper>
       <View style={styles.container}>
       {/* Login */}
         <View>
-          <TouchableOpacity style={styles.loginButton}>
+          <TouchableOpacity onPress={() => router.push('/(auth)/login')} style={styles.loginButton}>
             <Typo fontWeight={"600"}>
               Sign In
             </Typo>
@@ -62,7 +67,7 @@ const welcome = () => {
               .springify()
               .damping(12)}
             style={styles.buttonContainer}>
-            <Button>
+            <Button onPress={() => router.push('/(auth)/register')}>
               <Typo size={22} fontWeight={"600"} color={colors.neutral900}>
                 Get Started
               </Typo>
@@ -74,7 +79,7 @@ const welcome = () => {
   )
 }
 
-export default welcome
+export default Welcome
 
 const styles = StyleSheet.create({
   container: {
@@ -84,10 +89,8 @@ const styles = StyleSheet.create({
   },
   welcomeImage: {
     width: "100%",
-    // height: "300",
-    height: verticalScale(400),
+    height: verticalScale(300),
     alignSelf: "center",
-    marginTop: verticalScale(100)
   },
   loginButton: {
     alignSelf: "flex-end",
